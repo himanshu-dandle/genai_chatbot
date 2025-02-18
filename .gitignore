@@ -1,0 +1,9 @@
+# Ignore virtual environment
+genai_hr_chatbot_env/
+
+# Ignore cache files
+__pycache__/
+*.pyc
+
+# Ignore API keys
+.env

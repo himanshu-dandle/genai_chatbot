@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+openai
+pydantic
+streamlit
+requests
+python-dotenv
+PyMuPDF  # For reading PDF files
