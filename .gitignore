@@ -7,3 +7,9 @@ __pycache__/
 
 # Ignore API keys
 .env
+
+
+# Ignore test scripts and sensitive files
+test_pdf_reader.py
+test_azure_api.py
+test_azure_openai.py
