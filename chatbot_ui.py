@@ -2,7 +2,10 @@ import streamlit as st
 import requests  # ✅ Use requests to call FastAPI
 
 # ✅ FastAPI URL (Ensure this matches your FastAPI backend)
-FASTAPI_URL = "http://127.0.0.1:8000/ask"
+##FASTAPI_URL = "http://127.0.0.1:8000/ask"
+
+
+FASTAPI_URL = "https://genai-chatbot-3uqj.onrender.com/ask"
 
 # Web App UI
 st.set_page_config(page_title="HR Chatbot", page_icon="🤖")
