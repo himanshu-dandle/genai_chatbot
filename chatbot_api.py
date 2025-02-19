@@ -17,6 +17,8 @@ class QueryRequest(BaseModel):
     question: str
 
 # ✅ Function to generate GPT-4 response using HR policy text
+import openai
+
 def generate_gpt4_response(question, policy_answer):
     prompt = f"""
     You are an HR chatbot. The user asked: "{question}".
@@ -25,16 +27,15 @@ def generate_gpt4_response(question, policy_answer):
     """
 
     response = openai.chat.completions.create(
-    model="gpt-4",
-    messages=[
-        {"role": "system", "content": "You are an HR assistant. Use only the provided policy."},
-        {"role": "user", "content": prompt}
-    ],
-    max_tokens=200
-)
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an HR assistant. Use only the provided policy."},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=200
+    )
 
-
-    return response["choices"][0]["message"]["content"]
+    return response.choices[0].message.content  # ✅ Correct way to extract response
 
 # ✅ API endpoint for chatbot queries
 @app.post("/ask")
