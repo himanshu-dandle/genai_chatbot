@@ -24,14 +24,15 @@ def generate_gpt4_response(question, policy_answer):
     Always answer using this policy. If the policy does not mention something, say "I don't have information on that."
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are an HR assistant. Use only the provided policy."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=200
-    )
+    response = openai.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are an HR assistant. Use only the provided policy."},
+        {"role": "user", "content": prompt}
+    ],
+    max_tokens=200
+)
+
 
     return response["choices"][0]["message"]["content"]
 
