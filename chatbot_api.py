@@ -22,6 +22,36 @@ slack_client = WebClient(token=slack_token)
 class QueryRequest(BaseModel):
     question: str
 
+# ✅ Handle Slack URL Verification
+@app.post("/slack/events")
+async def slack_events(request: Request):
+    data = await request.json()
+
+    # ✅ Handle Slack challenge verification
+    if data.get("type") == "url_verification":
+        return {"challenge": data["challenge"]}
+
+    # ✅ Process Slack messages
+    event = data.get("event", {})
+    if event.get("type") == "app_mention":
+        user_message = event.get("text", "")
+        channel_id = event.get("channel")
+
+        # 🔍 Debugging: Print the received Slack message
+        print(f"🔹 Slack Message Received: {user_message}")
+
+        # Get GPT-4 response
+        policy_answer = search_policy_documents(user_message.lower().split())
+        bot_reply = generate_gpt4_response(user_message, policy_answer)
+
+        # Send reply to Slack
+        try:
+            slack_client.chat_postMessage(channel=channel_id, text=bot_reply)
+        except SlackApiError as e:
+            print(f"❌ Slack API Error: {e.response['error']}")
+
+    return {"status": "ok"}
+
 # ✅ Function to generate GPT-4 response using HR policy text
 def generate_gpt4_response(question, policy_answer):
     prompt = f"""
@@ -59,31 +89,6 @@ def ask_question(request: QueryRequest):
     gpt4_response = generate_gpt4_response(request.question, policy_answer)
     
     return {"question": request.question, "answer": gpt4_response}
-
-# ✅ Slack Event API Route
-@app.post("/slack/events")
-async def slack_events(request: Request):
-    payload = await request.json()
-    event = payload.get("event", {})
-
-    if event.get("type") == "app_mention":
-        user_message = event.get("text", "")
-        channel_id = event.get("channel")
-
-        # 🔍 Debugging: Print the received Slack message
-        print(f"🔹 Slack Message Received: {user_message}")
-
-        # Get GPT-4 response
-        policy_answer = search_policy_documents(user_message.lower().split())
-        bot_reply = generate_gpt4_response(user_message, policy_answer)
-
-        # Send reply to Slack
-        try:
-            slack_client.chat_postMessage(channel=channel_id, text=bot_reply)
-        except SlackApiError as e:
-            print(f"❌ Slack API Error: {e.response['error']}")
-
-    return {"status": "ok"}
 
 # ✅ Root endpoint
 @app.get("/")
