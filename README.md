@@ -1,11 +1,12 @@
 # 🤖 ***AI-Powered HR Chatbot (Slack Integration)***  
 
-![GitHub repo size](https://img.shields.io/github/repo-size/himanu-dandle/genai_chatbot?style=flat)  
-![GitHub contributors](https://img.shields.io/github/contributors/himanu-dandle/genai_chatbot?color=blue)  
-![GitHub last commit](https://img.shields.io/github/last-commit/himanu-dandle/genai_chatbot)  
+![GitHub repo size](https://img.shields.io/github/repo-size/himanshu-dandle/genai_chatbot?style=flat)  
+![GitHub contributors](https://img.shields.io/github/contributors/himanshu-dandle/genai_chatbot?color=blue)  
+![GitHub last commit](https://img.shields.io/github/last-commit/himanshu-dandle/genai_chatbot)  
+
 
 💬 **Live Chatbot Demo:** 👉 *Coming Soon*  
-💻 **GitHub Repository:** 👉 [genai_chatbot](https://github.com/himanu-dandle/genai_chatbot)  
+💻 **GitHub Repository:** 👉 [genai_chatbot](https://github.com/himanshu-dandle/genai_chatbot)  
 
 ---
 
